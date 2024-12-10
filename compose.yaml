@@ -1,0 +1,32 @@
+services:
+
+  db:
+    container_name: db-postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: dbshippings
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgres/data
+  
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_NAME: dbshippings
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db-postgres
+      DB_PORT: 5432
+
+volumes:
+  db-data: {}
+

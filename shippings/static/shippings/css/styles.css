@@ -1,0 +1,292 @@
+:root{
+    --color-darkp: #388E3C;
+    --color-lightp: #C8E6C9;
+    --color-primary: #4CAF50;
+    --color-accent: #9E9E9E;
+    --color-textp: #212121;
+    --color-texts: #757575;
+    --color-divider: #BDBDBD;
+    --color-logo: #126d3b;
+    --color-logo-opacity: rgb(18, 109, 59, 0.5);
+
+    --font-nav: "Roboto Flex", sans-serif;
+    --font-forms: "Istok Web", sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 50%;
+}
+
+body {
+    background-image: url('../images/subtle-prism.png');
+}
+
+.header-content {
+    background: var(--color-lightp);
+}
+
+.nav-content {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    max-width: 100rem;
+    margin: 0 auto;
+    padding: 5px;
+    width: 100%;
+}
+
+.nav-content img {
+    height: 4rem;
+}
+
+.nav-content div {
+    align-content: end;
+    list-style: none;
+}
+
+.nav-content ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    list-style: none;
+}
+
+.nav-content ul li {
+    justify-self: center;
+}
+
+.nav-content ul li a {
+    font-size: 1.6rem;
+    font-family: var(--font-nav);
+    text-transform: uppercase;
+    color: var(--color-logo);
+    transition: 300ms ease-in-out;
+}
+
+.nav-content ul li a:hover {
+    border-top: 3px solid var(--color-logo-opacity)
+}
+
+.container {
+    max-width: 100rem;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.info {
+    padding: 5px;
+    font-size: 1.6rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+    background-color: rgb(0, 227, 110);
+    margin-bottom: 10px;
+}
+
+.error {
+    padding: 5px;
+    font-size: 1.6rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0.3rem solid red;
+    border-radius: 5px;
+    background-color: rgb(211, 111, 111);
+    margin-bottom: 10px;
+}
+
+.warning {
+    padding: 5px;
+    font-size: 1.6rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+    background-color: rgb(143, 193, 114);
+    margin-bottom: 10px;
+}
+
+.form-open-xml {
+    padding: 10px;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+}
+
+.form-open-xml label {
+    font-size: 1.6rem;
+    font-family: var(--font-nav);
+    color: var(--color-logo);
+}
+
+.form-open-xml input[type=file] {
+    margin-top: 15px;
+    font-size: 1.4rem;
+    font-family: var(--font-forms);
+    color: var(--color-darkp);
+}
+
+.form-open-xml input[type=submit] {
+    padding: 3px;
+    margin-top: 15px;
+    font-size: 1.6rem;
+    font-family: var(--font-nav);
+    text-transform: uppercase;
+    color: var(--color-logo);
+    width: 10rem;
+    background-color: var(--color-lightp);
+    border: 1px solid var(--color-logo-opacity);
+    border-radius: 5px;
+
+}
+
+.form-register {
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    grid-template-areas: 
+        "cliente cliente cliente"
+        "nfe emission limit" 
+        "volumes peso nfe_remessa";
+}
+
+.form-register .cliente {
+    grid-area: cliente;
+}
+.form-register .nfe {
+    grid-area: nfe;
+}
+.form-register .emission {
+    grid-area: emission;
+}
+.form-register .limit {
+    grid-area: limit;
+}
+.form-register .volumes {
+    grid-area: volumes;
+}
+.form-register .peso {
+    grid-area: peso;
+}
+
+.form-register .nfe_remessa {
+    grid-area: nfe_remessa;
+}
+
+
+.form-register label {
+    font-size: 1.3rem;
+    font-family: var(--font-forms);
+    color: var(--color-logo);
+}
+
+.form-register input {
+    background: white;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.form-register input:focus {
+   box-shadow: 0px 0px 2px 1px var(--color-primary);
+   outline: none;
+}
+
+.head-products{
+    display: grid;
+    grid-template-columns: 13% 50% 10% 1fr 1fr;
+    margin-top: 20px;
+}
+
+.head-products div {
+    display: flex;
+    font-family: var(--font-forms);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: var(--color-logo);
+    border: 1px solid var(--color-logo-opacity);
+    background: var(--color-lightp);
+    justify-content: center;
+}
+
+.head-products input {
+    height: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    align-self: center;
+    border: 1px solid var(--color-logo-opacity);
+    outline: none;
+    text-align: center;
+}
+
+.head-products .input_descricao {
+    text-align: start;
+}
+
+.form-buttons {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    margin-top: 40px;
+}
+
+.form-buttons input {
+    padding: 3px;
+    margin-top: 15px;
+    font-size: 1.6rem;
+    font-family: var(--font-nav);
+    text-transform: uppercase;
+    color: var(--color-logo);
+    width: 10rem;
+    background-color: var(--color-lightp);
+    border: 1px solid var(--color-logo-opacity);
+    border-radius: 5px;
+}
+
+
+.form-buttons input[type=submit] {
+    width: 20rem;
+    background-color: var(--color-logo);
+    color: var(--color-lightp);
+}
+
+/* cadastro de retorno */
+
+.remessas {
+    display: grid;
+    grid-template-columns: 13% 40% 1fr 1fr 0.5fr;
+}
+
+.remessas .head {
+    display: flex;
+    font-size: 1.6rem;
+    font-family: var(--font-forms);
+    color: var(--color-logo);
+    text-transform: uppercase;
+    background: var(--color-lightp);
+    border: 1px solid var(--color-logo-opacity);
+    justify-content: center;
+}
+
+.remessas .for-remessas {
+    display: flex;
+    font-size: 1.6rem;
+    font-family: var(--font-forms);
+    text-transform: uppercase;
+    border: 1px solid var(--color-logo-opacity);
+    justify-content: center;
+    align-content: center;
+    height: 25px;
+}
+
+.button-remessa {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 1.6rem;
+    border: 1px solid var(--color-logo-opacity);
+}
+
+.button-remessa i{
+    color: #126d3b;
+}

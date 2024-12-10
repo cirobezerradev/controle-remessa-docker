@@ -1,0 +1,74 @@
+{% extends "global/base.html" %}
+
+{% block title %}
+<title>Controle de Remessas - Cadastrar Remessa</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    {% include "shippings/partial/_messages.html" %}
+    <div class="content-open-xml">
+        <form action={% url "abrir_xml_remessa" %} method="POST" 
+        enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form-open-xml">
+                <label for="xml">ESCOLHA O XML</label><br>
+                <input type="file" name="xml" id="xml" accept=".xml"><br>
+                <input type="submit" value="Abrir">
+            </div>   
+        </form>
+        <br>
+        <form action={% url "cadastrar_remessa" %} method='POST'>
+            {% csrf_token %}
+            <div class="form-register">
+                <div class="cliente">
+                    <label for="cliente">Cliente</label><br>
+                    <input type="text" id='cliente' name='remessa' size="50" readonly value="{{ cliente }}">
+                </div>
+                <div class="nfe">
+                    <label for="nfe">NFe</label><br>
+                    <input type="number" id='nfe' name='remessa' readonly value={{ nfe }}>
+                </div>
+                <div class="emission">
+                    <label for="emission">Data de Emissão</label><br>
+                    <input type="data" id='emission' name='remessa' readonly value={{ emission }}>
+                </div>
+                <div class="limit">
+                    <label for="limit">Data Limite</label><br>
+                    <input type="data" id='limit' name='remessa' readonly value={{ limit }}>
+                </div>
+                <div class="volumes">
+                    <label for="volumes">Volumes</label><br>
+                    <input type="number" id='volumes' name='remessa' readonly value={{ volumes }}>
+                </div>
+                <div class="peso">
+                    <label for="peso">Peso</label><br>
+                    <input type="number" id='peso' name='remessa' readonly value="{{ peso|floatformat:2 }}">
+                </div>
+            </div>
+            <div class="head-products">
+                <div>código</div>
+                <div>descrição</div>
+                <div>un</div>
+                <div>quantidade</div>
+                <div>valor unit.(r$)</div>
+                {% for item in itens %}
+                <input type="number" name="{{ forloop.counter }}" readonly value={{ item.0 }}>
+                <input type="text" name="{{ forloop.counter }}" readonly value="{{ item.1 }}">
+                <input type="text" name="{{ forloop.counter }}" readonly value={{ item.2 }}>
+                <input type="number" name="{{ forloop.counter }}" readonly value={{ item.3|floatformat:2 }}>
+                <input type="number" name="{{ forloop.counter }}" readonly value={{ item.4|floatformat:2 }}>
+                {% endfor %}
+            </div>
+
+            {% url "abrir_xml_remessa" as abrir_xml %}
+            {% if request.get_full_path == abrir_xml %}
+            <div class="form-buttons">
+                <div><input type="submit" value="salvar remessa"></div>
+                <div><a href={% url "cadastrar_remessa" %}><input type="button" value="limpar"></a></div>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock content %}

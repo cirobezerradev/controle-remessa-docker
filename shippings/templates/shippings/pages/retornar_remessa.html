@@ -1,0 +1,28 @@
+{% extends "global/base.html" %}
+
+{% block title %}
+<title>Controle de Remessas - Cadastrar Retorno</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="remessas">
+        <div class="head">nfe</div>
+        <div class="head">cliente</div>
+        <div class="head">data emissão</div>
+        <div class="head">data limite</div>
+        <div></div>
+        {% for remessa in remessas %}
+        <div class="for-remessas">{{ remessa.nfe }}</div>
+        <div class="for-remessas">{{ remessa.cliente }}</div>
+        <div class="for-remessas">{{ remessa.data_emissao|date:"d/m/Y" }}</div>
+        <div class="for-remessas">{{ remessa.data_limite|date:"d/m/Y" }}</div>
+        <div class="button-remessa">
+            <a href={% url "cadastrar_retorno" nfe=remessa.nfe %}>
+                <i class="fa-solid fa-circle-check"></i>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
