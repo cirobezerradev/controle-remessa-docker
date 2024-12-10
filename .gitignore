@@ -142,3 +142,4 @@ GitHub.sublime-settings
 # Docker
 .dockerignore
 Dockerfile
+compose.yaml
