@@ -1,0 +1,37 @@
+{% extends "global/base.html" %}
+
+{% block title %}
+<title>Controle de Remessas - Cadastrar Retorno</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="content-buscar-remessas">
+        <form action={% url "buscar_remessas" %}>
+            <div class="form-buscar-remessas">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="buscar">
+            </div>
+        </form>    
+    </div>
+    <div class="list-shippings">
+        <table>
+            <tr>
+                <th>NFe</th>
+                <th>Data Emissão</th>
+                <th>Data Limite</th>
+                <th>Status</th>
+            </tr>
+            {% for shipping in page_obj %}
+            <tr>
+                <td><a href="#">{{ shipping.nfe }}</a></td>
+                <td>{{ shipping.data_emissao|date:"d/m/Y"}}</td>
+                <td>{{ shipping.data_limite|date:"d/m/Y" }}</td>
+                <td>{{ shipping.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

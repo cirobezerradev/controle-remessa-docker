@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator
 from django.db.utils import IntegrityError
 from dom_nfe import DomNFe
 from .models import Shipping, ShippingItem, ShippingStorage, ReturnOfShip, ReturnItem
@@ -7,6 +8,7 @@ from .validators import *
 from django.contrib import messages
 from django.http import HttpResponse
 from django.db.models import Sum, Avg, Count
+from .forms import SearchShip
 
 # Create your views here.
 
@@ -91,6 +93,38 @@ def retornar_remessa(request):
     return render(request, 'shippings/pages/retornar_remessa.html', {'remessas': lista})
 
 
+def abrir_xml_retorno(request, nfe):
+    if request.method == 'POST' and request.path == f'/cadastrar_retorno/{nfe}/xml':
+        if not request.FILES == {}:
+            try:
+                xml = request.FILES.get('xml')
+
+                validator_extension_file(xml)
+
+                dom = DomNFe(xml)
+
+                validator_cfop_retorno(dom.cfop)
+
+                return render(request, 'shippings/pages/cadastrar_retorno.html',
+                              {'cliente': dom.cliente,
+                               'nfe': dom.num_nfe,
+                               'emission': dom.data_emissao,
+                               'limit': dom.data_limite,
+                               'volumes': dom.volumes,
+                               'peso': dom.peso,
+                               'itens': dom.itens,
+                               'nfe_remessa': nfe})
+            
+            except ValidationError as e:
+                messages.error(request, e)
+                return render(request, 'shippings/pages/cadastrar_retorno.html', {'nfe_remessa': nfe})
+            except XMLInvalidError as e:
+                messages.error(request, e)
+                return render(request, 'shippings/pages/cadastrar_retorno.html', {'nfe_remessa': nfe})
+
+    return redirect('cadastrar_retorno', nfe)
+
+
 def cadastrar_retorno(request, nfe):
     if request.method == 'POST' and request.path == f'/cadastrar_retorno/{nfe}/':
         try:
@@ -113,7 +147,7 @@ def cadastrar_retorno(request, nfe):
                                         nfe_retorno= ReturnOfShip.objects.get(nfe=return_shipping.nfe)
                                         )              
 
-                # BUSCA O ID DO ITEM NO ESTOQUE QUE FOI RETORNADO EM CADA LOOP                
+                # BUSCA O ID DO ITEM NO ESTOQUE QUE SERÁ RETORNADO EM CADA LOOP                
                 id_item = ShippingStorage.objects.values().filter(nfe_remessa=nfe,
                                                                 codigo=request.POST.getlist(f'{i}')[0])[0]['id']
                 product_storage = ShippingStorage.objects.get(id=id_item)
@@ -160,34 +194,16 @@ def cadastrar_retorno(request, nfe):
         
     return render(request, 'shippings/pages/cadastrar_retorno.html', {'nfe_remessa': nfe})
 
+def buscar_remessas(request):
+    if request.method == 'POST':
+        pass
 
-def abrir_xml_retorno(request, nfe):
-    if request.method == 'POST' and request.path == f'/cadastrar_retorno/{nfe}/xml':
-        if not request.FILES == {}:
-            try:
-                xml = request.FILES.get('xml')
+    form = SearchShip()
 
-                validator_extension_file(xml)
+    shippings = Shipping.objects.all()
+    paginator = Paginator(shippings, 5)
 
-                dom = DomNFe(xml)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-                validator_cfop_retorno(dom.cfop)
-
-                return render(request, 'shippings/pages/cadastrar_retorno.html',
-                              {'cliente': dom.cliente,
-                               'nfe': dom.num_nfe,
-                               'emission': dom.data_emissao,
-                               'limit': dom.data_limite,
-                               'volumes': dom.volumes,
-                               'peso': dom.peso,
-                               'itens': dom.itens,
-                               'nfe_remessa': nfe})
-            
-            except ValidationError as e:
-                messages.error(request, e)
-                return render(request, 'shippings/pages/cadastrar_retorno.html', {'nfe_remessa': nfe})
-            except XMLInvalidError as e:
-                messages.error(request, e)
-                return render(request, 'shippings/pages/cadastrar_retorno.html', {'nfe_remessa': nfe})
-
-    return redirect('cadastrar_retorno', nfe)
+    return render(request, 'shippings/pages/buscar_remessas.html', {'form': form, 'page_obj': page_obj})

@@ -8,4 +8,5 @@ urlpatterns = [
     path('cadastrar_retorno/retornar_remessa/', views.retornar_remessa, name='retornar_remessa'),
     path('cadastrar_retorno/<int:nfe>/', views.cadastrar_retorno, name='cadastrar_retorno'),
     path('cadastrar_retorno/<int:nfe>/xml', views.abrir_xml_retorno, name='abrir_xml_retorno'),
+    path('buscar_remessas/', views.buscar_remessas, name='buscar_remessas'),
 ]

@@ -4,10 +4,6 @@ from django.core.exceptions import ValidationError
 class XMLInvalidError(Exception):
     pass
 
-
-class ItemExists(Exception):
-    pass
-
 class InsufficientStock(Exception):
     pass
 
@@ -34,11 +30,5 @@ def validator_cfop_retorno(cfop: list):
     if not set(cfop) == {6902}:
         raise XMLInvalidError(
             f'XML INVÁLIDO: CFOP da NFe não conforme. CFOP: {set(cfop)}')
-
     return True
 
-
-def item_exists(nfe: str) -> bool:
-    if nfe:
-        raise ItemExists(f'A NFe {nfe.nfe} já foi cadastrada anteriormente.')
-    return True
