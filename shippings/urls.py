@@ -10,4 +10,5 @@ urlpatterns = [
     path('cadastrar_retorno/<int:nfe>/xml', views.abrir_xml_retorno, name='abrir_xml_retorno'),
     path('buscar_remessas/', views.buscar_remessas, name='buscar_remessas'),
     path('relatorio_remessa/<int:nfe>/', views.relatorio_remessa, name='relatorio_remessa'),
+    path('relatorio_retorno/<int:nfe>/', views.relatorio_retorno, name='relatorio_retorno'),
 ]

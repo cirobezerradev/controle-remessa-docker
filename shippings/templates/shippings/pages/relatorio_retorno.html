@@ -1,0 +1,41 @@
+{% extends 'global/popup.html' %}
+{% load static %}
+
+{% block title %}
+<title>Relatório de Retorno</title>
+{% endblock title %}
+
+{% load money %}
+{% block content %}
+<div class="content">
+    <div class="report-header-ret">
+        <div class='nfe'>nfe retorno:<span>{{ retorno.nfe }}</span></div>
+        <div class='data-emissao'>data emissao:<span>{{ retorno.data_emissao|date:"d/m/Y" }}</span></div>
+        <div class="volumes">volumes:<span>{{ retorno.volumes }}</span></div>
+        <div class="peso">peso:<span>{{ retorno.peso|currency }} kg</span></div>
+        <div class='nfe_remessa'>nfe remessa:<span>{{ retorno.nfe_remessa.nfe }}</span></div>
+        <div class="valor-total">valor total:<span>R$ {{ valor_retorno|currency }}</span></div>
+    </div>
+    <div class="report-items-ret">
+        <div>itens:</div>
+        <table>
+            <tr>
+                <th>código</th>
+                <th>descrição</th>
+                <th>un</th>
+                <th>quantidade</th>
+                <th>valor unit.</th>
+            </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.codigo }}</td>
+                    <td>{{ item.descricao }}</td>
+                    <td>{{ item.un }}</td>
+                    <td>{{ item.quantidade|currency }}</td>
+                    <td>R$ {{ item.valor_unit|currency }}</td>
+                </tr>
+                {% endfor %}
+        </table>  
+    </div>
+</div>
+{% endblock content %}

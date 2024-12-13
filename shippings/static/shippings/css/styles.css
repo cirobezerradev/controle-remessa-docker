@@ -33,6 +33,7 @@ body {
     background: var(--color-lightp);
 }
 
+/* ESTILO DA NAVBAR PRINCIPAL */
 .nav-content {
     display: grid;
     grid-template-columns: 150px 1fr;
@@ -40,37 +41,37 @@ body {
     margin: 0 auto;
     padding: 5px;
     width: 100%;
-}
 
-.nav-content img {
-    height: 4rem;
-}
+    img {
+        height: 4rem;
+    }
 
-.nav-content div {
-    align-content: end;
-    list-style: none;
-}
+    div {
+        align-content: end;
+        list-style: none;
+    }
 
-.nav-content ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    list-style: none;
-}
+    ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        list-style: none;
+        
+        li {
+            justify-self: center;
 
-.nav-content ul li {
-    justify-self: center;
-}
+            a {
+                font-size: 1.6rem;
+                font-family: var(--font-nav);
+                text-transform: uppercase;
+                color: var(--color-logo);
+                transition: 300ms ease-in-out;
+            }
 
-.nav-content ul li a {
-    font-size: 1.6rem;
-    font-family: var(--font-nav);
-    text-transform: uppercase;
-    color: var(--color-logo);
-    transition: 300ms ease-in-out;
-}
-
-.nav-content ul li a:hover {
-    border-top: 3px solid var(--color-logo-opacity)
+            a:hover {
+                border-top: 3px solid var(--color-logo-opacity)
+            }
+        }
+    }
 }
 
 .container {
@@ -79,6 +80,7 @@ body {
     padding-top: 10px;
 }
 
+/* ESTILO DAS MENSAGENS DO DJANGO */
 .info {
     padding: 5px;
     font-size: 1.6rem;
@@ -109,37 +111,37 @@ body {
     margin-bottom: 10px;
 }
 
+/* ESTILO FORMULARIO PARA ABRIR XML "CADASTRO DE REMESSA" E "CADASTRO DE RETORNO" */
 .form-open-xml {
     padding: 10px;
     border: 0.3rem solid var(--color-logo-opacity);
     border-radius: 5px;
-}
 
-.form-open-xml label {
-    font-size: 1.6rem;
-    font-family: var(--font-nav);
-    color: var(--color-logo);
-}
+    label {
+        font-size: 1.6rem;
+        font-family: var(--font-nav);
+        color: var(--color-logo);
+    }
 
-.form-open-xml input[type=file] {
-    margin-top: 15px;
-    font-size: 1.4rem;
-    font-family: var(--font-forms);
-    color: var(--color-darkp);
-}
+    input[type=file] {
+        margin-top: 15px;
+        font-size: 1.4rem;
+        font-family: var(--font-forms);
+        color: var(--color-darkp);
+    }
 
-.form-open-xml input[type=submit] {
-    padding: 3px;
-    margin-top: 15px;
-    font-size: 1.6rem;
-    font-family: var(--font-nav);
-    text-transform: uppercase;
-    color: var(--color-logo);
-    width: 10rem;
-    background-color: var(--color-lightp);
-    border: 1px solid var(--color-logo-opacity);
-    border-radius: 5px;
-
+    input[type=submit] {
+        padding: 3px;
+        margin-top: 15px;
+        font-size: 1.6rem;
+        font-family: var(--font-nav);
+        text-transform: uppercase;
+        color: var(--color-logo);
+        width: 10rem;
+        background-color: var(--color-lightp);
+        border: 1px solid var(--color-logo-opacity);
+        border-radius: 5px;
+    }
 }
 
 .form-register {
@@ -173,7 +175,6 @@ body {
 .form-register .nfe_remessa {
     grid-area: nfe_remessa;
 }
-
 
 .form-register label {
     font-size: 1.3rem;
@@ -255,33 +256,39 @@ body {
 .remessas {
     display: grid;
     grid-template-columns: 13% 40% 1fr 1fr;
+
+    a:visited {
+        color: blue;
+    }
+
+    .head {
+        display: flex;
+        font-size: 1.6rem;
+        font-family: var(--font-forms);
+        color: var(--color-logo);
+        text-transform: uppercase;
+        background: var(--color-lightp);
+        border: 1px solid var(--color-logo-opacity);
+        justify-content: center;
+    }
+
+    .for-remessas {
+        display: flex;
+        font-size: 1.6rem;
+        font-family: var(--font-forms);
+        text-transform: uppercase;
+        border: 1px solid var(--color-logo-opacity);
+        justify-content: center;
+        align-content: center;
+        height: 25px;
+    }
 }
 
-.remessas a:visited {
-    color: blue;
-}
+/* .remessas 
 
-.remessas .head {
-    display: flex;
-    font-size: 1.6rem;
-    font-family: var(--font-forms);
-    color: var(--color-logo);
-    text-transform: uppercase;
-    background: var(--color-lightp);
-    border: 1px solid var(--color-logo-opacity);
-    justify-content: center;
-}
+.remessas 
 
-.remessas .for-remessas {
-    display: flex;
-    font-size: 1.6rem;
-    font-family: var(--font-forms);
-    text-transform: uppercase;
-    border: 1px solid var(--color-logo-opacity);
-    justify-content: center;
-    align-content: center;
-    height: 25px;
-}
+.remessas  */
 
 
 /* STYLE BUSCAR REMESSAS */
@@ -295,58 +302,57 @@ body {
 .form-buscar-remessas {
     display: grid;
     grid-template-columns: 350px 1fr 1fr;
-    align-items: center;   
-}
+    align-items: center;
+    
+    label {
+        font-size: 1.6rem;
+        font-family: var(--font-nav);
+        color: var(--color-logo);
+    }
+    /* retira as setas do inpurt number */
+    input[type=number]::-webkit-inner-spin-button{
+        appearance: none;
+    }
 
-.form-buscar-remessas label {
-    font-size: 1.6rem;
-    font-family: var(--font-nav);
-    color: var(--color-logo);
-}
+    input {
+        margin-left: 10px;
+        background: white;
+        border: 0.3rem solid var(--color-logo-opacity);
+        border-radius: 5px;
+    }
 
-.form-buscar-remessas input[type=number]::-webkit-inner-spin-button{
-    appearance: none;
-}
+    input[type=submit] {
+        padding: 3px;
+        margin-left: 30px;
+        font-size: 1.6rem;
+        font-family: var(--font-nav);
+        text-transform: uppercase;
+        color: var(--color-logo);
+        width: 10rem;
+        background-color: var(--color-lightp);
+        border: 1px solid var(--color-logo-opacity);
+        border-radius: 5px;
+    }
 
-.form-buscar-remessas input {
-    margin-left: 10px;
-    background: white;
-    border: 0.3rem solid var(--color-logo-opacity);
-    border-radius: 5px;
-}
-
-.form-buscar-remessas input[type=submit] {
-    padding: 3px;
-    margin-left: 30px;
-    font-size: 1.6rem;
-    font-family: var(--font-nav);
-    text-transform: uppercase;
-    color: var(--color-logo);
-    width: 10rem;
-    background-color: var(--color-lightp);
-    border: 1px solid var(--color-logo-opacity);
-    border-radius: 5px;
-}
-
-.form-buscar-remessas input[type=button] {
-    padding: 3px;
-    margin-left: 30px;
-    font-size: 1.6rem;
-    font-family: var(--font-nav);
-    color: var(--color-logo);
-    text-transform: uppercase;
-    width: 15rem;
-    background-color: var(--color-lightp);
-    border: 1px solid var(--color-logo-opacity);
-    border-radius: 5px;
+    input[type=button] {
+        padding: 3px;
+        margin-left: 30px;
+        font-size: 1.6rem;
+        font-family: var(--font-nav);
+        color: var(--color-logo);
+        text-transform: uppercase;
+        width: 15rem;
+        background-color: var(--color-lightp);
+        border: 1px solid var(--color-logo-opacity);
+        border-radius: 5px;
+    }
 }
 
 .list-shippings {
     margin-top: 30px;
-}
-
-.list-shippings td a:visited{
-    color: blue;
+    td a:visited {
+        color: blue;
+    }
 }
 
 table {
@@ -370,30 +376,6 @@ table td {
     border: 1px solid var(--color-logo-opacity);
 }
 
-/* .list-shippings table {
-    font-size: 1.6rem;
-    border-collapse: collapse;
-    font-family: var(--font-forms);
-    text-transform: uppercase;
-    justify-content: center;
-    align-content: center;
-    width: 100%;
-    height: 25px;
-}
-
-.list-shippings table th {
-    color: var(--color-logo);
-    background: var(--color-lightp);
-    border: 1px solid var(--color-logo-opacity);
-}
-
-.list-shippings table td {
-    font-size: 1.6rem;
-    font-family: var(--font-forms);
-    text-align: center;
-    border: 1px solid var(--color-logo-opacity);
-} */
-
 .page-ship {
     display: flex;
     justify-content: end;
@@ -415,7 +397,7 @@ table td {
 
 /*  RELATÓRIO REMESSA */
 
-.report_header {
+.report-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
@@ -425,69 +407,224 @@ table td {
     padding: 10px 0 0 10px;
     border: 0.3rem solid var(--color-logo-opacity);
     border-radius: 5px;
+
+    div {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        font-family: var(--font-forms);
+        color: var(--color-logo);
+        text-transform: uppercase;
+
+        span {
+            margin-left: 10px; 
+            font-size: 1.6rem;
+            font-family: var(--font-forms);
+            color: var(--color-textp);
+            text-transform: uppercase;
+        }
+    }
+
+    .nfe {
+        grid-area: nfe;
+    }
+    .cliente {
+        grid-area: cliente;
+    }
+    .emission {
+        grid-area: emission;
+    }
+    .limit {
+        grid-area: limit;
+    }
+    .status {
+        grid-area: status;
+    }
+    .volumes {
+        grid-area: volumes;
+    }
+    .peso {
+        grid-area: peso;
+        span {
+            text-transform: lowercase;
+        }
+    }
+    .valor-total {
+        grid-area: valor;
+    }
 }
 
-.report_header div { 
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-    font-family: var(--font-forms);
-    color: var(--color-logo);
-    text-transform: uppercase;
-}
-
-.report_header span {
-    margin-left: 10px; 
-    font-size: 1.6rem;
-    font-family: var(--font-forms);
-    color: var(--color-textp);
-    text-transform: uppercase;
-}
-
-.report_header .nfe {
-    grid-area: nfe;
-}
-
-.report_header .cliente {
-    grid-area: cliente;
-}
-
-.report_header .emission {
-    grid-area: emission;
-}
-
-.report_header .limit {
-    grid-area: limit;
-}
-
-.report_header .status {
-    grid-area: status;
-}
-
-.report_header .volumes {
-    grid-area: volumes;
-}
-
-.report_header .peso span {
-    grid-area: peso;
-    text-transform: lowercase;
-}
-
-.report_header .valor-total {
-    grid-area: valor;
-}
-
-.ship-items {
+.report-items {
     display: grid;
     grid-template-columns: 1fr;
     padding: 10px;
     border: 0.3rem solid var(--color-logo-opacity);
     border-radius: 5px;
+
+    div {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        font-family: var(--font-forms);
+        color: var(--color-logo);
+        text-transform: uppercase;
+    }
 }
 
-.ship-items div {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-    font-family: var(--font-forms);
-    color: var(--color-logo);
-    text-transform: uppercase;
+.stock-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "title title"
+        "value volpeso"
+        "items items";
+    padding: 10px;
+    margin-top: 5px;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+
+    div {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        font-family: var(--font-forms);
+        color: var(--color-logo);
+        text-transform: uppercase;
+
+        span {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            padding: 0 15px 0 15px;
+            font-family: var(--font-forms);
+            color: var(--color-textp);
+        }
+    }
+    .volumes-peso {
+        display: flex;
+        grid-area: volpeso;
+    }
+    .title-stock {
+        grid-area: title;
+    }
+    .value-stock {
+        grid-area: value;
+    }
+    .table-items {
+        grid-area: items;
+    }
+
+}
+
+.returns-ship {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    margin-top: 5px;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+    width: 35%;
+    
+    div {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        font-family: var(--font-forms);
+        color: var(--color-logo);
+        text-transform: uppercase;
+    }
+}
+
+/* RELATÓRIO RETORNO */
+.report-header-ret {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "nfe emissao emissao"
+        "volumes peso remessa"
+        "valor valor valor";
+    padding: 10px 0 0 10px;
+    margin: 10px;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+
+    div {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        font-family: var(--font-forms);
+        color: var(--color-logo);
+        text-transform: uppercase;
+
+        span {
+            margin-left: 10px; 
+            font-size: 1.6rem;
+            font-family: var(--font-forms);
+            color: var(--color-textp);
+            text-transform: uppercase;
+        }
+    }
+
+    .nfe {
+        grid-area: nfe;
+    }
+
+    .emission {
+        grid-area: emission;
+    }
+    .volumes {
+        grid-area: volumes;
+    }
+    .peso {
+        grid-area: peso;
+        span {
+            text-transform: lowercase;
+        }
+    }
+    .nfe_remessa {
+        grid-area: remessa;
+    }
+    .valor-total {
+        grid-area: valor;
+    }
+}
+
+.report-items-ret {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    margin: 10px;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+
+    div {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+        font-family: var(--font-forms);
+        color: var(--color-logo);
+        text-transform: uppercase;
+    }
+}
+
+.nav-report {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 100rem;
+    margin: 0 auto;
+    padding: 5px;
+    width: 100%;
+    justify-items: center;
+
+    img {
+        height: 4rem;
+    }
+
+    hr {
+        margin: 5px 0 5px 0;
+        width: 100%;
+        border: 0px;
+        border-top: 2px solid var(--color-logo);
+        background: var(--color-logo);
+    }
+
+    .title-return-report {
+        font-size: 2.1rem;
+        font-family: var(--font-nav);
+        text-transform: uppercase;
+        color: var(--color-logo);
+        text-align: center;
+    }
 }

@@ -11,6 +11,12 @@ from django.db.models import Sum, Avg, Count
 from .forms import SearchShip
 
 
+def calcula_valor_total(obj: object) -> float:
+        valor_total = 0
+        for item in obj:
+            valor_total += item['quantidade'] * item['valor_unit']
+        return valor_total
+
 def index(request):
     return render(request, 'shippings/pages/index.html')
 
@@ -220,14 +226,47 @@ def buscar_remessas(request):
     return render(request, 'shippings/pages/buscar_remessas.html', {'form': form, 'page_obj': page_obj})
 
 def relatorio_remessa(request, nfe):
+        
+    def calcula_peso_volume(obj1: Shipping, obj2: ReturnOfShip) -> float:
+        total_vol_retorno = 0
+        total_peso_retorno = 0
+        for retorno in obj2:
+            total_vol_retorno += retorno['volumes']
+            total_peso_retorno += retorno['peso']
+
+        volumes = obj1.volumes - total_vol_retorno
+        peso = obj1.peso - total_peso_retorno
+
+        return volumes, peso 
+
     if request.method == 'GET' and request.path == f'/relatorio_remessa/{nfe}/':
         shipping = Shipping.objects.get(nfe=nfe)
         shipping_items = ShippingItem.objects.values().filter(nfe_remessa=nfe)
+        stock_items = ShippingStorage.objects.values().filter(nfe_remessa=nfe)
+        return_shipping = ReturnOfShip.objects.values().filter(nfe_remessa=nfe)
 
-        valor_total = 0
-        for item in shipping_items:
-            valor_total += item['quantidade'] * item['valor_unit']
+        valor_remessa = calcula_valor_total(shipping_items)
+        valor_stock = calcula_valor_total(stock_items)
+
+        volumes, peso = calcula_peso_volume(shipping, return_shipping)     
 
     return render(request, 'shippings/pages/relatorio_remessa.html', {'shipping': shipping,
-                                                                      'valor_total': valor_total, 
-                                                                      'items': shipping_items})
+                                                                      'valor_remessa': valor_remessa, 
+                                                                      'items': shipping_items,
+                                                                      'stock_items': stock_items,
+                                                                      'valor_stock': valor_stock,
+                                                                      'return_shipping': return_shipping,
+                                                                      'volumes': volumes,
+                                                                      'peso': peso})
+
+
+def relatorio_retorno(request, nfe):
+    if request.method == 'GET' and request.path == f'/relatorio_retorno/{nfe}/':
+        return_ship = ReturnOfShip.objects.get(nfe=nfe)
+        return_items = ReturnItem.objects.values().filter(nfe_retorno=nfe)
+
+        valor_total = calcula_valor_total(return_items)
+
+    return render(request, 'shippings/pages/relatorio_retorno.html', {'retorno': return_ship,
+                                                                      'items': return_items,
+                                                                      'valor_retorno': valor_total})

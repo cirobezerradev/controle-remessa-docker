@@ -33,10 +33,10 @@
                     <label for="emission">Data de Emissão</label><br>
                     <input type="data" id='emission' name='retorno' readonly value={{ emission }}>
                 </div>
-                <div class="limit">
+                {% comment %} <div class="limit">
                     <label for="limit">Data Limite</label><br>
                     <input type="data" id='limit' name='retorno' readonly value={{ limit }}>
-                </div>
+                </div> {% endcomment %}
                 <div class="volumes">
                     <label for="volumes">Volumes</label><br>
                     <input type="number" id='volumes' name='retorno' readonly value={{ volumes }}>

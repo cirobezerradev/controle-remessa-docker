@@ -47,7 +47,6 @@ class ReturnOfShip(models.Model):
     cliente = models.CharField(max_length=255, default=None)
     nfe = models.IntegerField(primary_key=True)
     data_emissao = models.DateField()
-    data_limite = models.DateField()
     volumes = models.IntegerField()
     peso = models.DecimalField(max_digits=10, decimal_places=2)
     nfe_remessa = models.ForeignKey(Shipping, on_delete=models.CASCADE)
