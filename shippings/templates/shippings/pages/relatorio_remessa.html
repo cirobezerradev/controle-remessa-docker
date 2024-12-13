@@ -1,0 +1,42 @@
+{% extends "global/base.html" %}
+
+{% block title %}
+<title>Controle de Remessas - Cadastrar Retorno</title>
+{% endblock title %}
+{% load money %}
+{% block content %}
+<div class="container">
+    <div class="report_header">
+        <div class='nfe'>nfe remessa:<span>{{ shipping.nfe }}</span></div>
+        <div class='cliente'>cliente:<span>{{ shipping.cliente }}</span></div>
+        <div class='data-emissao'>data emissao:<span>{{ shipping.data_emissao|date:"d/m/Y" }}</span></div>
+        <div class='data-limite'>data limite:<span>{{ shipping.data_limite|date:"d/m/Y" }}</span></div>
+        <div class='status'>status:<span>{{ shipping.status }}</span></div>
+        <div class="volumes">volumes:<span>{{ shipping.volumes }}</span></div>
+        <div class="peso">peso:<span>{{ shipping.peso|currency }} kg</span></div>
+        <div class="valor-total">valor total:<span>R$ {{ valor_total|currency }}</span></div>
+    </div> 
+    <div class="ship-items">
+        <div>itens:</div>
+        <table>
+            <tr>
+                <th>código</th>
+                <th>descrição</th>
+                <th>un</th>
+                <th>quantidade</th>
+                <th>valor unit.</th>
+            </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.codigo }}</td>
+                    <td>{{ item.descricao }}</td>
+                    <td>{{ item.un }}</td>
+                    <td>{{ item.quantidade|currency }}</td>
+                    <td>R$ {{ item.valor_unit|currency }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+         
+    </div>
+</div>
+{% endblock content %}

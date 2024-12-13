@@ -8,4 +8,4 @@ from .models import Shipping, ShippingItem
 #                   'data_limite', 'volumes', 'peso']
 
 class SearchShip(forms.Form):
-    shipping = forms.IntegerField(label="NFe REMESSA")
+    shipping = forms.IntegerField(label="NFe REMESSA", required=False)

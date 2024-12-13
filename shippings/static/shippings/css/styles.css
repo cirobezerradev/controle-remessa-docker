@@ -254,7 +254,11 @@ body {
 
 .remessas {
     display: grid;
-    grid-template-columns: 13% 40% 1fr 1fr 0.5fr;
+    grid-template-columns: 13% 40% 1fr 1fr;
+}
+
+.remessas a:visited {
+    color: blue;
 }
 
 .remessas .head {
@@ -279,17 +283,6 @@ body {
     height: 25px;
 }
 
-.button-remessa {
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    font-size: 1.6rem;
-    border: 1px solid var(--color-logo-opacity);
-}
-
-.button-remessa i{
-    color: #126d3b;
-}
 
 /* STYLE BUSCAR REMESSAS */
 
@@ -301,7 +294,7 @@ body {
 
 .form-buscar-remessas {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 350px 1fr 1fr;
     align-items: center;   
 }
 
@@ -335,16 +328,49 @@ body {
     border-radius: 5px;
 }
 
+.form-buscar-remessas input[type=button] {
+    padding: 3px;
+    margin-left: 30px;
+    font-size: 1.6rem;
+    font-family: var(--font-nav);
+    color: var(--color-logo);
+    text-transform: uppercase;
+    width: 15rem;
+    background-color: var(--color-lightp);
+    border: 1px solid var(--color-logo-opacity);
+    border-radius: 5px;
+}
+
 .list-shippings {
     margin-top: 30px;
 }
 
-.list-shippings a:visited{
+.list-shippings td a:visited{
     color: blue;
 }
 
-.list-shippings table {
+table {
+    font-size: 1.6rem;
+    border-collapse: collapse;
+    font-family: var(--font-forms);
     text-transform: uppercase;
+    width: 100%;
+    height: 25px;
+}
+
+table th {
+    color: var(--color-logo);
+    background: var(--color-lightp);
+    border: 1px solid var(--color-logo-opacity);
+}
+
+table td {
+    font-size: 1.4rem;
+    text-align: center;
+    border: 1px solid var(--color-logo-opacity);
+}
+
+/* .list-shippings table {
     font-size: 1.6rem;
     border-collapse: collapse;
     font-family: var(--font-forms);
@@ -366,7 +392,102 @@ body {
     font-family: var(--font-forms);
     text-align: center;
     border: 1px solid var(--color-logo-opacity);
+} */
+
+.page-ship {
+    display: flex;
+    justify-content: end;
+    padding-top: 15px;
+    font-size: 1.6rem;
+    font-family: var(--font-forms);
+    text-transform: uppercase; 
 }
 
+.current-page, .previous-next {
+    color: var(--color-logo);
+    font-size: 1.6rem;
+}
 
+.nexts {
+    color: var(--color-logo-opacity);
+    font-size: 1.4rem;
+}
 
+/*  RELATÓRIO REMESSA */
+
+.report_header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "nfe cliente cliente"
+        "emission limit status"
+        "volumes peso valor";
+    padding: 10px 0 0 10px;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+}
+
+.report_header div { 
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    font-family: var(--font-forms);
+    color: var(--color-logo);
+    text-transform: uppercase;
+}
+
+.report_header span {
+    margin-left: 10px; 
+    font-size: 1.6rem;
+    font-family: var(--font-forms);
+    color: var(--color-textp);
+    text-transform: uppercase;
+}
+
+.report_header .nfe {
+    grid-area: nfe;
+}
+
+.report_header .cliente {
+    grid-area: cliente;
+}
+
+.report_header .emission {
+    grid-area: emission;
+}
+
+.report_header .limit {
+    grid-area: limit;
+}
+
+.report_header .status {
+    grid-area: status;
+}
+
+.report_header .volumes {
+    grid-area: volumes;
+}
+
+.report_header .peso span {
+    grid-area: peso;
+    text-transform: lowercase;
+}
+
+.report_header .valor-total {
+    grid-area: valor;
+}
+
+.ship-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    border: 0.3rem solid var(--color-logo-opacity);
+    border-radius: 5px;
+}
+
+.ship-items div {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    font-family: var(--font-forms);
+    color: var(--color-logo);
+    text-transform: uppercase;
+}

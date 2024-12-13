@@ -10,8 +10,6 @@ from django.http import HttpResponse
 from django.db.models import Sum, Avg, Count
 from .forms import SearchShip
 
-# Create your views here.
-
 
 def index(request):
     return render(request, 'shippings/pages/index.html')
@@ -195,15 +193,41 @@ def cadastrar_retorno(request, nfe):
     return render(request, 'shippings/pages/cadastrar_retorno.html', {'nfe_remessa': nfe})
 
 def buscar_remessas(request):
+
+    if request.POST.get('shipping') == '':
+        return redirect('buscar_remessas')
+    
     if request.method == 'POST':
-        pass
+        form = SearchShip(request.POST)
+
+        if form.is_valid():
+            try:    
+                shipping = Shipping.objects.get(nfe=request.POST.get('shipping'))
+                        
+                return render(request, 'shippings/pages/buscar_remessas.html', {'form': form, 'shipping': shipping})
+            
+            except Shipping.DoesNotExist:
+                messages.warning(request, f'A remessa {request.POST.get('shipping')} não existe na base de dados')
 
     form = SearchShip()
 
-    shippings = Shipping.objects.all()
+    shippings = Shipping.objects.all().order_by("-status", "nfe")
     paginator = Paginator(shippings, 5)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'shippings/pages/buscar_remessas.html', {'form': form, 'page_obj': page_obj})
+
+def relatorio_remessa(request, nfe):
+    if request.method == 'GET' and request.path == f'/relatorio_remessa/{nfe}/':
+        shipping = Shipping.objects.get(nfe=nfe)
+        shipping_items = ShippingItem.objects.values().filter(nfe_remessa=nfe)
+
+        valor_total = 0
+        for item in shipping_items:
+            valor_total += item['quantidade'] * item['valor_unit']
+
+    return render(request, 'shippings/pages/relatorio_remessa.html', {'shipping': shipping,
+                                                                      'valor_total': valor_total, 
+                                                                      'items': shipping_items})
